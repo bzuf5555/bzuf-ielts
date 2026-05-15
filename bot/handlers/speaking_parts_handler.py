@@ -87,11 +87,9 @@ PART_LABELS = {
 
 def _parts_menu_keyboard():
     return InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton("📝 Part 1", callback_data="speaking_part_1"),
-            InlineKeyboardButton("🎯 Part 2", callback_data="speaking_part_2"),
-            InlineKeyboardButton("💬 Part 3", callback_data="speaking_part_3"),
-        ],
+        [InlineKeyboardButton("📝 Part 1 — Umumiy savollar (20-45s)", callback_data="speaking_part_1")],
+        [InlineKeyboardButton("🎯 Part 2 — Cue Card (60-120s)", callback_data="speaking_part_2")],
+        [InlineKeyboardButton("💬 Part 3 — Munozara (30-60s)", callback_data="speaking_part_3")],
     ])
 
 

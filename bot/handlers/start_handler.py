@@ -82,8 +82,11 @@ def _main_inline_keyboard():
             InlineKeyboardButton("✍️ Writing nima?", callback_data="info_writing"),
             InlineKeyboardButton("🎤 Speaking nima?", callback_data="info_speaking"),
         ],
-        [InlineKeyboardButton("🎤 Speaking Amaliyoti (Part 1/2/3)", callback_data="speaking_menu")],
-        [InlineKeyboardButton("📊 Mening statistikam", callback_data="show_stats")],
+        [InlineKeyboardButton("━━━━ 🎤 SPEAKING AMALIYOTI ━━━━", callback_data="noop")],
+        [InlineKeyboardButton("📝 Part 1 — Umumiy savollar", callback_data="speaking_part_1")],
+        [InlineKeyboardButton("🎯 Part 2 — Cue Card (1-2 daqiqa)", callback_data="speaking_part_2")],
+        [InlineKeyboardButton("💬 Part 3 — Munozara", callback_data="speaking_part_3")],
+        [InlineKeyboardButton("📊 Statistika", callback_data="show_stats")],
     ])
 
 
@@ -159,6 +162,9 @@ async def help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
+
+    if query.data == "noop":
+        return
 
     if query.data == "info_writing":
         await query.message.reply_text(
