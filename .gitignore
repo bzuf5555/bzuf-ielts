@@ -53,3 +53,11 @@ htmlcov/
 
 # Render
 .render/
+
+# Playwright screenshots/logs
+.playwright-mcp/
+
+# Test files
+test_bot.py
+bot_output.txt
+bot_error.txt
