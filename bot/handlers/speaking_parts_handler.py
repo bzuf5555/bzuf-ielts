@@ -102,37 +102,8 @@ def _retry_keyboard(part: int):
     ])
 
 
-async def speaking_menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Show Part 1/2/3 selection menu."""
-    text = (
-        "🎤 *IELTS Speaking Amaliyoti*\n\n"
-        "Qaysi qismni mashq qilmoqchisiz?\n\n"
-        "📝 *Part 1* — Tanish mavzular haqida qisqa javoblar (20-45 soniya)\n"
-        "🎯 *Part 2* — Cue card: mavzu haqida 1-2 daqiqa gapirish\n"
-        "💬 *Part 3* — Abstrakt savollar, fikr bildirish (30-60 soniya)"
-    )
-    if update.callback_query:
-        await update.callback_query.message.reply_text(
-            text, parse_mode="Markdown", reply_markup=_parts_menu_keyboard()
-        )
-    else:
-        await update.message.reply_text(
-            text, parse_mode="Markdown", reply_markup=_parts_menu_keyboard()
-        )
-
-
-async def part_callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handle Part 1/2/3 button press — send question to user."""
-    query = update.callback_query
-    await query.answer()
-
-    data = query.data  # e.g. "speaking_part_1"
-
-    if data == "speaking_menu":
-        await speaking_menu_handler(update, context)
-        return
-
-    part = int(data.split("_")[-1])  # 1, 2, or 3
+async def send_part_question(update: Update, context: ContextTypes.DEFAULT_TYPE, part: int):
+    """Send the question/cue card for the given part and save state."""
     limits = PART_TIME_LIMITS[part]
 
     if part == 1:
@@ -143,7 +114,6 @@ async def part_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
             f"⏱️ Ideal vaqt: *{limits['ideal']}*\n"
             f"🎤 Ovozli xabar yuboring!"
         )
-
     elif part == 2:
         topic, bullets = random.choice(PART2_CUES)
         question = f"{topic} | {bullets}"
@@ -156,8 +126,7 @@ async def part_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
             f"💡 Gapirish oldidan 1 daqiqa o'ylash mumkin\n"
             f"🎤 Ovozli xabar yuboring!"
         )
-
-    else:  # part 3
+    else:
         question = random.choice(PART3_QUESTIONS)
         msg = (
             f"💬 *IELTS Speaking — Part 3*\n\n"
@@ -167,11 +136,38 @@ async def part_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
             f"🎤 Ovozli xabar yuboring!"
         )
 
-    # Save state
     context.user_data["speaking_part"] = part
     context.user_data["speaking_question"] = question
 
-    await query.message.reply_text(msg, parse_mode="Markdown")
+    target = update.callback_query.message if update.callback_query else update.message
+    await target.reply_text(msg, parse_mode="Markdown")
+
+
+async def speaking_menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Show Part 1/2/3 info (now mainly used from /speaking command)."""
+    text = (
+        "🎤 *IELTS Speaking Amaliyoti*\n\n"
+        "Pastdagi tugmalardan Part tanlang:\n\n"
+        "📝 *Part 1* — Tanish mavzular (20-45 soniya)\n"
+        "🎯 *Part 2* — Cue Card, uzun nutq (60-120 soniya)\n"
+        "💬 *Part 3* — Abstrakt savol, munozara (30-60 soniya)"
+    )
+    target = update.callback_query.message if update.callback_query else update.message
+    await target.reply_text(text, parse_mode="Markdown")
+
+
+async def part_callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handle inline Part 1/2/3 callback buttons."""
+    query = update.callback_query
+    await query.answer()
+
+    data = query.data
+    if data == "speaking_menu":
+        await speaking_menu_handler(update, context)
+        return
+
+    part = int(data.split("_")[-1])
+    await send_part_question(update, context, part)
 
 
 async def handle_parts_voice(

@@ -8,6 +8,14 @@ from telegram import (
 )
 from telegram.ext import ContextTypes
 
+# ─── Keyboard button labels ───────────────────────────────────────
+BTN_PART1 = "📝 Part 1"
+BTN_PART2 = "🎯 Part 2"
+BTN_PART3 = "💬 Part 3"
+BTN_STATS = "📊 Statistika"
+BTN_HISTORY = "📚 Tarix"
+BTN_HELP = "ℹ️ Yordam"
+
 CONTACT_REQUEST_TEXT = """👋 Assalomu aleykum, *{name}*!
 
 🎯 Men *BZUF IELTS Bot* — IELTS imtihoniga tayyorlanishingizga yordam beruvchi AI yordamchi.
@@ -21,73 +29,47 @@ WELCOME_TEXT = """✅ *Telefon raqam saqlandi!*
 
 📚 *Nima qila olaman?*
 
-✍️ *Writing tahlili:*
-• Ingliz tilida esse yuboring (matn yoki .txt hujjat)
-• Task 1 yoki Task 2 ekanligini avtomatik aniqlayman
-• 4 mezon bo'yicha IELTS bali va batafsil tahlil
+✍️ *Writing:* Ingliz tilida esse yuboring → IELTS bali + tahlil
+🎤 *Speaking:* Pastdagi tugmalardan Part tanlang → savol oling → ovoz yuboring
 
-🎤 *Speaking tahlili:*
-• Ovozli xabar yuboring
-• Nutqingizni IELTS mezonlari bo'yicha baholayman
-• Xatolar, to'g'rilangan variant va maslahatlar
-
-📊 *Tarix va statistika:*
-• /history — so'nggi 5 ta tahlil
-• /stats — umumiy statistikangiz
-
-⚡ Boshlash uchun esse matnini yoki ovozli xabarni yuboring!"""
+Boshlash uchun quyidagi tugmalardan birini bosing 👇"""
 
 ALREADY_REGISTERED_TEXT = """👋 Xush kelibsiz, *{name}*!
 
-🎯 *BZUF IELTS Bot* — IELTS Writing va Speaking yordamchisi.
-
-⚡ Esse matnini yoki ovozli xabarni yuboring!"""
+🎤 Speaking uchun pastdagi tugmalardan Part tanlang.
+✍️ Writing uchun ingliz tilida esse yuboring."""
 
 HELP_TEXT = """ℹ️ *BZUF IELTS Bot — Yordam*
 
-*Buyruqlar:*
-• /start — Botni boshlash
-• /help — Yordam
-• /history — So'nggi tahlillar
-• /stats — Statistika
+*Speaking (pastki tugmalar):*
+• 📝 Part 1 — Tanish mavzular (20-45s)
+• 🎯 Part 2 — Cue Card (60-120s)
+• 💬 Part 3 — Munozara (30-60s)
 
-*Writing uchun:*
-• Ingliz tilida esse yuboring (matn yoki .txt hujjat)
-• Kamida 50 so'z
-• Task 1: 150-200 so'z (grafik, jadval, jarayon, xarita)
-• Task 2: 250-350 so'z (esse, fikr-mulohaza)
-
-*Speaking uchun:*
-• Ingliz tilida ovozli xabar yuboring
-• Kamida 3 soniya, ko'pi bilan 10 daqiqa
+*Writing (matn yuboring):*
+• Ingliz tilida esse yuboring
+• Task 1: 150-200 so'z
+• Task 2: 250-350 so'z
 
 *IELTS Ball Tizimi (0-9):*
-• 9.0 — Mutaxassis (Expert)
-• 8.0 — Juda yaxshi (Very Good)
-• 7.0 — Yaxshi (Good)
-• 6.0 — Vakolatli (Competent)
-• 5.0 — Oddiy (Modest)
-• 4.0 — Cheklangan (Limited)
+• 9.0 — Mutaxassis | 8.0 — Juda yaxshi
+• 7.0 — Yaxshi | 6.0 — Vakolatli
+• 5.0 — Oddiy | 4.0 — Cheklangan
 
-*4 mezon bo'yicha baholanadi:*
-✍️ Writing: Vazifa, Izchillik, Lug'at, Grammatika
-🎤 Speaking: Ravonlik, Lug'at, Grammatika, Talaffuz
-
-⚠️ *Eslatma:* Faqat IELTS Writing va Speaking."""
+*Buyruqlar:*
+/start /help /history /stats /speaking"""
 
 
-def _main_inline_keyboard():
-    return InlineKeyboardMarkup([
+def main_keyboard():
+    """Persistent bottom keyboard shown to all registered users."""
+    return ReplyKeyboardMarkup(
         [
-            InlineKeyboardButton("✍️ Writing nima?", callback_data="info_writing"),
-            InlineKeyboardButton("🎤 Speaking nima?", callback_data="info_speaking"),
+            [BTN_PART1, BTN_PART2, BTN_PART3],
+            [BTN_STATS, BTN_HISTORY, BTN_HELP],
         ],
-        [InlineKeyboardButton("━━━━ 🎤 SPEAKING AMALIYOTI ━━━━", callback_data="noop")],
-        [InlineKeyboardButton("📝 Part 1 — Umumiy savollar", callback_data="speaking_part_1")],
-        [InlineKeyboardButton("🎯 Part 2 — Cue Card (1-2 daqiqa)", callback_data="speaking_part_2")],
-        [InlineKeyboardButton("💬 Part 3 — Munozara", callback_data="speaking_part_3")],
-        [InlineKeyboardButton("📊 Statistika", callback_data="show_stats")],
-    ])
+        resize_keyboard=True,
+        is_persistent=True,
+    )
 
 
 def _contact_keyboard():
@@ -96,6 +78,15 @@ def _contact_keyboard():
         resize_keyboard=True,
         one_time_keyboard=True,
     )
+
+
+def _info_inline_keyboard():
+    return InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("✍️ Writing haqida", callback_data="info_writing"),
+            InlineKeyboardButton("🎤 Speaking haqida", callback_data="info_speaking"),
+        ],
+    ])
 
 
 async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -120,7 +111,7 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             ALREADY_REGISTERED_TEXT.format(name=name),
             parse_mode="Markdown",
-            reply_markup=_main_inline_keyboard(),
+            reply_markup=main_keyboard(),
         )
 
 
@@ -131,7 +122,6 @@ async def contact_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if contact is None:
         return
 
-    # Faqat o'z kontaktini ulashish mumkin
     if contact.user_id != user.id:
         await update.message.reply_text(
             "❌ Iltimos, faqat o'z telefon raqamingizni ulashing.",
@@ -147,16 +137,39 @@ async def contact_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         WELCOME_TEXT.format(name=name),
         parse_mode="Markdown",
-        reply_markup=ReplyKeyboardRemove(),
+        reply_markup=main_keyboard(),
     )
     await update.message.reply_text(
-        "Quyidagi tugmalar orqali ko'proq bilib oling 👇",
-        reply_markup=_main_inline_keyboard(),
+        "Ko'proq ma'lumot uchun 👇",
+        reply_markup=_info_inline_keyboard(),
     )
 
 
 async def help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(HELP_TEXT, parse_mode="Markdown")
+    await update.message.reply_text(
+        HELP_TEXT,
+        parse_mode="Markdown",
+        reply_markup=main_keyboard(),
+    )
+
+
+async def keyboard_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handles bottom keyboard button presses."""
+    text = update.message.text
+
+    if text == BTN_HELP:
+        await help_handler(update, context)
+    elif text == BTN_STATS:
+        from .history_handler import stats_handler
+        await stats_handler(update, context)
+    elif text == BTN_HISTORY:
+        from .history_handler import history_handler
+        await history_handler(update, context)
+    elif text in (BTN_PART1, BTN_PART2, BTN_PART3):
+        part_map = {BTN_PART1: 1, BTN_PART2: 2, BTN_PART3: 3}
+        part = part_map[text]
+        from .speaking_parts_handler import send_part_question
+        await send_part_question(update, context, part)
 
 
 async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -165,23 +178,22 @@ async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if query.data == "noop":
         return
-
-    if query.data == "info_writing":
+    elif query.data == "info_writing":
         await query.message.reply_text(
-            "✍️ *Writing haqida:*\n\nIngliz tilida esse yuboring. Bot Task 1 yoki Task 2 ekanligini avtomatik aniqlab, quyidagi 4 mezon bo'yicha IELTS bali beradi:\n\n• Vazifani bajarish\n• Izchillik va bog'liqlik\n• Leksik boylik\n• Grammatik to'g'rilik\n\n*Task 1 (150-200 so'z):* Grafik, jadval, jarayon yoki xarita tavsifi\n*Task 2 (250-350 so'z):* Esse, fikr-mulohaza, munozara",
+            "✍️ *Writing haqida:*\n\nIngliz tilida esse yuboring. Bot Task 1 yoki Task 2 ekanligini avtomatik aniqlab, 4 mezon bo'yicha IELTS bali beradi:\n\n• Vazifani bajarish\n• Izchillik va bog'liqlik\n• Leksik boylik\n• Grammatik to'g'rilik\n\n*Task 1 (150-200 so'z):* Grafik, jadval, jarayon\n*Task 2 (250-350 so'z):* Esse, fikr-mulohaza",
             parse_mode="Markdown",
         )
     elif query.data == "info_speaking":
         await query.message.reply_text(
-            "🎤 *Speaking haqida:*\n\nIngliz tilida ovozli xabar yuboring. Bot nutqingizni matnga aylantiradi va 4 mezon bo'yicha IELTS bali beradi:\n\n• Ravonlik va izchillik\n• Leksik boylik\n• Grammatik to'g'rilik\n• Talaffuz",
+            "🎤 *Speaking haqida:*\n\nPastdagi tugmalardan Part tanlang, savol oling va ovozli xabar yuboring.\n\n• 📝 Part 1 — Qisqa javoblar (20-45s)\n• 🎯 Part 2 — Uzun nutq (60-120s)\n• 💬 Part 3 — Munozara (30-60s)",
             parse_mode="Markdown",
         )
-    elif query.data == "speaking_menu":
-        from .speaking_parts_handler import speaking_menu_handler
-        await speaking_menu_handler(update, context)
     elif query.data == "show_stats":
         db = context.bot_data.get("db")
         if db:
             from ..utils.formatters import format_stats
             stats = await db.get_user_stats(query.from_user.id)
             await query.message.reply_text(format_stats(stats), parse_mode="Markdown")
+    elif query.data == "speaking_menu":
+        from .speaking_parts_handler import speaking_menu_handler
+        await speaking_menu_handler(update, context)

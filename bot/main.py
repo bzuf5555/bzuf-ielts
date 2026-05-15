@@ -17,7 +17,11 @@ from .services.mongodb_service import MongoDBService
 from .services.stt_service import STTService
 from .agents.writing_agent import WritingAgent
 from .agents.speaking_agent import SpeakingAgent
-from .handlers.start_handler import start_handler, help_handler, callback_handler, contact_handler
+from .handlers.start_handler import (
+    start_handler, help_handler, callback_handler,
+    contact_handler, keyboard_button_handler,
+    BTN_PART1, BTN_PART2, BTN_PART3, BTN_STATS, BTN_HISTORY, BTN_HELP,
+)
 from .handlers.writing_handler import writing_handler, document_handler
 from .handlers.speaking_handler import speaking_handler
 from .handlers.speaking_parts_handler import speaking_menu_handler, part_callback_handler
@@ -58,6 +62,9 @@ def build_application() -> Application:
     app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
     app.add_handler(MessageHandler(filters.VOICE, speaking_handler))
     app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
+    # Keyboard buttons must be caught BEFORE writing_handler
+    keyboard_btns = filters.Text([BTN_PART1, BTN_PART2, BTN_PART3, BTN_STATS, BTN_HISTORY, BTN_HELP])
+    app.add_handler(MessageHandler(keyboard_btns, keyboard_button_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, writing_handler))
     app.add_error_handler(error_handler)
 
