@@ -4,9 +4,9 @@ from telegram import Update
 from telegram.ext import ContextTypes
 from ..utils.validators import validate_voice_duration
 from ..utils.formatters import format_speaking_feedback, format_transcript
+from .speaking_parts_handler import handle_parts_voice
 
 logger = logging.getLogger(__name__)
-
 MAX_MESSAGE_LENGTH = 4000
 
 
@@ -34,21 +34,25 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return
 
+    # ── Parts mode: delegate to parts handler ──────────────────
+    if context.user_data.get("speaking_part"):
+        await handle_parts_voice(update, context, voice, db, speaking_agent, stt_service)
+        return
+
+    # ── General speaking mode ───────────────────────────────────
     valid, error_msg = validate_voice_duration(voice.duration)
     if not valid:
         await update.message.reply_text(f"❌ {error_msg}")
         return
 
     processing_msg = await update.message.reply_text(
-        f"🎙️ *Nutq qabul qilindi!*\n⏱️ Davomiyligi: {voice.duration} soniya\n\n🔄 Ovozdan matn ajratilmoqda...",
+        f"🎙️ *Nutq qabul qilindi!*\n⏱️ {voice.duration} soniya\n\n🔄 Ovozdan matn ajratilmoqda...",
         parse_mode="Markdown",
     )
 
     try:
         file = await context.bot.get_file(voice.file_id)
-        file_url = file.file_path
-
-        transcript, audio_duration = await stt_service.process_voice_message(file_url)
+        transcript, audio_duration = await stt_service.process_voice_message(file.file_path)
 
         await processing_msg.edit_text(
             "✅ *Matn ajratildi!*\n\n📊 IELTS mezonlari bo'yicha baholanmoqda...",
@@ -58,7 +62,7 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         feedback, model_used, elapsed_ms = await speaking_agent.analyze(transcript, audio_duration)
 
         if db:
-            submission_doc = {
+            await db.save_submission({
                 "user_id": user.id,
                 "submission_type": "speaking",
                 "original_text": transcript[:2000],
@@ -69,21 +73,16 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "model_used": model_used,
                 "processing_time_ms": elapsed_ms,
                 "created_at": datetime.utcnow(),
-            }
-            await db.save_submission(submission_doc)
+            })
 
         await processing_msg.delete()
 
-        # Send transcript preview first
         transcript_text = format_transcript(transcript)
-        if len(transcript_text) > MAX_MESSAGE_LENGTH:
-            transcript_text = transcript_text[:MAX_MESSAGE_LENGTH]
-        await update.message.reply_text(transcript_text, parse_mode="Markdown")
+        await update.message.reply_text(transcript_text[:MAX_MESSAGE_LENGTH], parse_mode="Markdown")
 
-        # Send speaking feedback
         feedback_text = format_speaking_feedback(feedback, audio_duration)
         if len(feedback_text) > MAX_MESSAGE_LENGTH:
-            feedback_text = feedback_text[:MAX_MESSAGE_LENGTH] + "\n\n_(Tahlil qisqartirildi)_"
+            feedback_text = feedback_text[:MAX_MESSAGE_LENGTH] + "\n_(qisqartirildi)_"
         await update.message.reply_text(feedback_text, parse_mode="Markdown")
 
     except ValueError as e:

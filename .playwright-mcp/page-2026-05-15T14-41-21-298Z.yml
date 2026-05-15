@@ -1,0 +1,169 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - banner [ref=e4]:
+        - generic [ref=e5]:
+          - link "Render" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - img "Render" [ref=e8]
+          - button "b bzuf's workspace" [ref=e12] [cursor=pointer]:
+            - generic [ref=e13]:
+              - generic [ref=e14]: b
+              - generic "bzuf's workspace" [ref=e15]
+              - img [ref=e16]
+        - generic [ref=e20]:
+          - navigation [ref=e21]:
+            - list [ref=e22]:
+              - listitem [ref=e23]:
+                - button "New Web Service" [ref=e506] [cursor=pointer]:
+                  - generic [ref=e507]:
+                    - img [ref=e508]
+                    - generic [ref=e510]:
+                      - generic [ref=e511]: New Web Service
+                      - img [ref=e512]
+          - button "Search Ctrl + K" [ref=e31] [cursor=pointer]:
+            - img [ref=e33]
+            - text: Search
+            - generic [ref=e35]:
+              - img [ref=e36]
+              - generic [ref=e38]: Ctrl
+              - generic [ref=e39]: +
+              - generic [ref=e40]: K
+              - generic [ref=e41]: K
+        - generic [ref=e42]:
+          - button "New" [ref=e44] [cursor=pointer]:
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - generic [ref=e48]: New
+          - button "Upgrade" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e54]: Upgrade
+          - button "Help" [ref=e56] [cursor=pointer]:
+            - img "Help" [ref=e57]
+          - button "b" [ref=e62] [cursor=pointer]:
+            - generic [ref=e64]: b
+      - main [ref=e515]:
+        - heading "New Web Service" [level=1] [ref=e518]
+        - generic [ref=e519]:
+          - generic [ref=e522]: Source Code
+          - generic [ref=e523]:
+            - list [ref=e524]:
+              - listitem [ref=e525]:
+                - tab "Git Provider" [selected] [ref=e526] [cursor=pointer]
+              - listitem [ref=e527]:
+                - tab "Public Git Repository" [ref=e528] [cursor=pointer]
+              - listitem [ref=e529]:
+                - tab "Existing Image" [ref=e530] [cursor=pointer]
+            - tabpanel "Git Provider" [ref=e532]:
+              - generic [ref=e534]:
+                - generic [ref=e535]:
+                  - generic [ref=e538]:
+                    - img
+                    - textbox "Search" [active] [ref=e539]
+                  - button "Credentials (1)" [ref=e541] [cursor=pointer]:
+                    - generic [ref=e543]:
+                      - img [ref=e546]
+                      - img [ref=e550]
+                      - img [ref=e557]
+                    - generic [ref=e562]: Credentials (1)
+                    - img [ref=e563]
+                - list [ref=e567]:
+                  - listitem [ref=e568]:
+                    - button "GitHub bzuf5555 / bzuf-ielts 6m ago" [ref=e569] [cursor=pointer]:
+                      - generic [ref=e570]:
+                        - img "GitHub" [ref=e572]
+                        - generic [ref=e574]: bzuf5555
+                        - generic [ref=e575]: /
+                        - generic [ref=e576]: bzuf-ielts
+                      - time [ref=e578]: 6m ago
+                  - listitem [ref=e579]:
+                    - button "GitHub bzuf5555 / face-id 2h ago" [ref=e580] [cursor=pointer]:
+                      - generic [ref=e581]:
+                        - img "GitHub" [ref=e583]
+                        - generic [ref=e585]: bzuf5555
+                        - generic [ref=e586]: /
+                        - generic [ref=e587]: face-id
+                      - time [ref=e589]: 2h ago
+                  - listitem [ref=e590]:
+                    - button "GitHub bzuf5555 / bzuf-apteka 19h ago" [ref=e591] [cursor=pointer]:
+                      - generic [ref=e592]:
+                        - img "GitHub" [ref=e594]
+                        - generic [ref=e596]: bzuf5555
+                        - generic [ref=e597]: /
+                        - generic [ref=e598]: bzuf-apteka
+                      - time [ref=e600]: 19h ago
+                  - listitem [ref=e601]:
+                    - button "GitHub bzuf5555 / krujok-bot 3d ago" [ref=e602] [cursor=pointer]:
+                      - generic [ref=e603]:
+                        - img "GitHub" [ref=e605]
+                        - generic [ref=e607]: bzuf5555
+                        - generic [ref=e608]: /
+                        - generic [ref=e609]: krujok-bot
+                      - time [ref=e611]: 3d ago
+                  - listitem [ref=e612]:
+                    - button "GitHub bzuf5555 / emir-hub 4d ago" [ref=e613] [cursor=pointer]:
+                      - generic [ref=e614]:
+                        - img "GitHub" [ref=e616]
+                        - generic [ref=e618]: bzuf5555
+                        - generic [ref=e619]: /
+                        - generic [ref=e620]: emir-hub
+                      - time [ref=e622]: 4d ago
+                  - listitem [ref=e623]:
+                    - button "GitHub bzuf5555 / shpion-bot 11d ago" [ref=e624] [cursor=pointer]:
+                      - generic [ref=e625]:
+                        - img "GitHub" [ref=e627]
+                        - generic [ref=e629]: bzuf5555
+                        - generic [ref=e630]: /
+                        - generic [ref=e631]: shpion-bot
+                      - time [ref=e633]: 11d ago
+                  - listitem [ref=e634]:
+                    - button "GitHub bzuf5555 / gree-uz 11d ago" [ref=e635] [cursor=pointer]:
+                      - generic [ref=e636]:
+                        - img "GitHub" [ref=e638]
+                        - generic [ref=e640]: bzuf5555
+                        - generic [ref=e641]: /
+                        - generic [ref=e642]: gree-uz
+                      - time [ref=e644]: 11d ago
+                  - listitem [ref=e645]:
+                    - button "GitHub bzuf5555 / fresh-dash 14d ago" [ref=e646] [cursor=pointer]:
+                      - generic [ref=e647]:
+                        - img "GitHub" [ref=e649]
+                        - generic [ref=e651]: bzuf5555
+                        - generic [ref=e652]: /
+                        - generic [ref=e653]: fresh-dash
+                      - time [ref=e655]: 14d ago
+                  - listitem [ref=e656]:
+                    - button "GitHub bzuf5555 / mafia-game 14d ago" [ref=e657] [cursor=pointer]:
+                      - generic [ref=e658]:
+                        - img "GitHub" [ref=e660]
+                        - generic [ref=e662]: bzuf5555
+                        - generic [ref=e663]: /
+                        - generic [ref=e664]: mafia-game
+                      - time [ref=e666]: 14d ago
+                  - listitem [ref=e667]:
+                    - button "GitHub bzuf5555 / sat-up 16d ago" [ref=e668] [cursor=pointer]:
+                      - generic [ref=e669]:
+                        - img "GitHub" [ref=e671]
+                        - generic [ref=e673]: bzuf5555
+                        - generic [ref=e674]: /
+                        - generic [ref=e675]: sat-up
+                      - time [ref=e677]: 16d ago
+    - generic:
+      - generic:
+        - generic: "0 services selected:"
+        - generic:
+          - generic:
+            - button:
+              - generic:
+                - img
+              - generic: Move
+              - img
+      - generic:
+        - separator
+        - generic:
+          - generic:
+            - button:
+              - img
+  - iframe [ref=e418]:
+    

@@ -1,0 +1,238 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Global" [ref=e3]:
+      - link "UptimeRobot" [ref=e5] [cursor=pointer]:
+        - /url: https://uptimerobot.com/
+        - generic [ref=e6]: UptimeRobot
+        - img [ref=e8]
+      - generic [ref=e11]:
+        - button "Features" [ref=e13] [cursor=pointer]:
+          - text: Features
+          - img [ref=e14]
+        - button "Solutions" [ref=e17] [cursor=pointer]:
+          - text: Solutions
+          - img [ref=e18]
+        - link "Enterprise" [ref=e20] [cursor=pointer]:
+          - /url: https://uptimerobot.com/enterprise/?ref=header
+        - button "Resources" [ref=e22] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e23]
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: https://uptimerobot.com/pricing/?ref=header
+      - generic [ref=e26]:
+        - link "Log in" [ref=e27] [cursor=pointer]:
+          - /url: https://dashboard.uptimerobot.com/login?ref=header
+        - link "Get started free" [ref=e28] [cursor=pointer]:
+          - /url: https://dashboard.uptimerobot.com/sign-up?ref=header
+  - main [ref=e29]:
+    - generic [ref=e31]:
+      - strong [ref=e32]:
+        - text: "4"
+        - generic "0" [ref=e33]
+        - text: "4"
+      - heading "Oooppsie!" [level=1] [ref=e34]
+      - paragraph [ref=e35]:
+        - text: The stuff you are looking for doesn't exist or has been moved.
+        - text: Start again from home page and you will find it for sure.
+      - link "Go to Homepage" [ref=e36] [cursor=pointer]:
+        - /url: /
+  - generic [ref=e39]:
+    - generic [ref=e40]:
+      - link "UptimeRobot logo" [ref=e41] [cursor=pointer]:
+        - /url: /
+        - img "UptimeRobot logo" [ref=e42]
+      - button "Open menu" [ref=e43] [cursor=pointer]:
+        - img [ref=e44]
+    - list [ref=e46]:
+      - listitem [ref=e47]:
+        - generic [ref=e48] [cursor=pointer]:
+          - text: Features
+          - img [ref=e49]
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e53]: Uptime monitoring
+            - list [ref=e54]:
+              - listitem [ref=e55]:
+                - link "Website & endpoint monitoring" [ref=e56] [cursor=pointer]:
+                  - /url: /website-monitoring/?ref=header
+              - listitem [ref=e57]:
+                - link "Keyword monitoring" [ref=e58] [cursor=pointer]:
+                  - /url: /keyword-monitoring/?ref=header
+              - listitem [ref=e59]:
+                - link "Ping monitoring" [ref=e60] [cursor=pointer]:
+                  - /url: /ping-monitoring/?ref=header
+              - listitem [ref=e61]:
+                - link "Port monitoring" [ref=e62] [cursor=pointer]:
+                  - /url: /port-monitoring/?ref=header
+              - listitem [ref=e63]:
+                - link "Cron job monitoring" [ref=e64] [cursor=pointer]:
+                  - /url: /cron-job-monitoring/?ref=header
+          - generic [ref=e65]:
+            - generic [ref=e66]: Monitoring features
+            - list [ref=e67]:
+              - listitem [ref=e68]:
+                - link "Domain monitoring" [ref=e69] [cursor=pointer]:
+                  - /url: /domain-expiration-monitoring/?ref=header
+              - listitem [ref=e70]:
+                - link "SSL monitoring" [ref=e71] [cursor=pointer]:
+                  - /url: /ssl-monitoring/?ref=header
+              - listitem [ref=e72]:
+                - link "Response time monitoring" [ref=e73] [cursor=pointer]:
+                  - /url: /response-time-monitoring/?ref=header
+              - listitem [ref=e74]:
+                - link "Multi-location monitoring" [ref=e75] [cursor=pointer]:
+                  - /url: /location-specific-monitoring/?ref=header
+              - listitem [ref=e76]:
+                - link "DNS monitoring" [ref=e77] [cursor=pointer]:
+                  - /url: /dns-monitoring/?ref=header
+              - listitem [ref=e78]:
+                - link "API monitoring" [ref=e79] [cursor=pointer]:
+                  - /url: /api-monitoring/?ref=header
+          - list [ref=e81]:
+            - listitem [ref=e82]:
+              - link "Icon Incident management Incident management" [ref=e83] [cursor=pointer]:
+                - /url: /incident-management/?ref=header
+                - img "Icon Incident management" [ref=e84]
+                - text: Incident management
+            - listitem [ref=e85]:
+              - link "Icon IT alerting software IT alerting software" [ref=e86] [cursor=pointer]:
+                - /url: /it-alerting-software/?ref=header
+                - img "Icon IT alerting software" [ref=e87]
+                - text: IT alerting software
+            - listitem [ref=e88]:
+              - link "Icon Status pages Status pages" [ref=e89] [cursor=pointer]:
+                - /url: /status-page/?ref=header
+                - img "Icon Status pages" [ref=e90]
+                - text: Status pages
+      - listitem [ref=e91]:
+        - generic [ref=e92] [cursor=pointer]:
+          - text: Solutions
+          - img [ref=e93]
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic [ref=e97]: For every team
+            - list [ref=e98]:
+              - listitem [ref=e99]:
+                - link "Devops" [ref=e100] [cursor=pointer]:
+                  - /url: /monitoring-for-devops/?ref=header
+              - listitem [ref=e101]:
+                - link "Developers" [ref=e102] [cursor=pointer]:
+                  - /url: /monitoring-for-developers/?ref=header
+              - listitem [ref=e103]:
+                - link "Marketers" [ref=e104] [cursor=pointer]:
+                  - /url: /monitoring-for-marketers/?ref=header
+              - listitem [ref=e105]:
+                - link "Support" [ref=e106] [cursor=pointer]:
+                  - /url: /monitoring-for-support/?ref=header
+              - listitem [ref=e107]:
+                - link "Business owners" [ref=e108] [cursor=pointer]:
+                  - /url: /monitoring-for-business-owners/?ref=header
+          - generic [ref=e109]:
+            - generic [ref=e110]: Go further with
+            - list [ref=e111]:
+              - listitem [ref=e112]:
+                - link "API" [ref=e113] [cursor=pointer]:
+                  - /url: /api/?ref=header
+              - listitem [ref=e114]:
+                - link "MCP" [ref=e115] [cursor=pointer]:
+                  - /url: /mcp/?ref=header
+              - listitem [ref=e116]:
+                - link "Integrations" [ref=e117] [cursor=pointer]:
+                  - /url: /integrations/?ref=header
+              - listitem [ref=e118]:
+                - link "Mobile app" [ref=e119] [cursor=pointer]:
+                  - /url: /mobile-app/?ref=header
+            - generic [ref=e120]: Meet our users
+            - list [ref=e121]:
+              - listitem [ref=e122]:
+                - link "Customers" [ref=e123] [cursor=pointer]:
+                  - /url: /customers/?ref=header
+      - listitem [ref=e124]:
+        - link "Enterprise" [ref=e125] [cursor=pointer]:
+          - /url: /enterprise/?ref=header
+    - list [ref=e126]:
+      - listitem [ref=e127]:
+        - generic [ref=e128] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e129]
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]: Help & learn
+            - list [ref=e134]:
+              - listitem [ref=e135]:
+                - link "Help center" [ref=e136] [cursor=pointer]:
+                  - /url: https://help.uptimerobot.com/en/
+              - listitem [ref=e137]:
+                - link "Location and IPs" [ref=e138] [cursor=pointer]:
+                  - /url: /help/locations/?ref=header
+              - listitem [ref=e139]:
+                - link "API docs" [ref=e140] [cursor=pointer]:
+                  - /url: /api/v3/?ref=header
+              - listitem [ref=e141]:
+                - link "Knowledge hub" [ref=e142] [cursor=pointer]:
+                  - /url: https://uptimerobot.com/knowledge-hub/?ref=header
+          - generic [ref=e143]:
+            - generic [ref=e144]: Community
+            - list [ref=e145]:
+              - listitem [ref=e146]:
+                - link "Roadmap" [ref=e147] [cursor=pointer]:
+                  - /url: /roadmap/?ref=header
+              - listitem [ref=e148]:
+                - link "Blog" [ref=e149] [cursor=pointer]:
+                  - /url: https://uptimerobot.com/blog/?ref=header
+              - listitem [ref=e150]:
+                - link "Discord" [ref=e151] [cursor=pointer]:
+                  - /url: https://uptimerobot.com/blog/uptimerobot-discord/?ref=header
+              - listitem [ref=e152]:
+                - link "Referral program" [ref=e153] [cursor=pointer]:
+                  - /url: /referral/?ref=header
+              - listitem [ref=e154]:
+                - link "Affiliate program" [ref=e155] [cursor=pointer]:
+                  - /url: /affiliate/?ref=header
+              - listitem [ref=e156]:
+                - link "Non-profit" [ref=e157] [cursor=pointer]:
+                  - /url: /sponsorship/?ref=header
+              - listitem [ref=e158]:
+                - link "Suggest a feature" [ref=e159] [cursor=pointer]:
+                  - /url: https://uptimerobot.nolt.io?ref=header
+          - generic [ref=e160]:
+            - generic [ref=e161]: Free tools
+            - list [ref=e162]:
+              - listitem [ref=e163]:
+                - link "Subnet calculator" [ref=e164] [cursor=pointer]:
+                  - /url: /free-tools/ip-subnet-calculator/?ref=header
+                - paragraph [ref=e165]: Find the subnet of any IP address
+              - listitem [ref=e166]:
+                - link "DNS lookup" [ref=e167] [cursor=pointer]:
+                  - /url: /free-tools/dns-lookup/?ref=header
+                - paragraph [ref=e168]: Instantly check DNS records for any domain
+              - listitem [ref=e169]:
+                - link "Uptime calculator" [ref=e170] [cursor=pointer]:
+                  - /url: /free-tools/uptime-downtime-calculator/?ref=header
+                - paragraph [ref=e171]: Calculate uptime, downtime, and outage costs
+              - listitem [ref=e172]:
+                - link "CrontabRobot" [ref=e173] [cursor=pointer]:
+                  - /url: /free-tools/cron-expression-generator/?ref=header
+                - paragraph [ref=e174]: Create and validate crontab expressions
+              - listitem [ref=e175]:
+                - link "Website change detection" [ref=e176] [cursor=pointer]:
+                  - /url: /free-tools/website-change-detection-tool/?ref=header
+                - paragraph [ref=e177]: Track visual changes on any webpage
+    - list [ref=e178]:
+      - listitem [ref=e179]:
+        - link "Pricing" [ref=e180] [cursor=pointer]:
+          - /url: /pricing/?ref=header
+    - generic [ref=e181]:
+      - link "Log In" [ref=e182] [cursor=pointer]:
+        - /url: https://dashboard.uptimerobot.com/login?ref=header
+      - link "Register for FREE" [ref=e183] [cursor=pointer]:
+        - /url: https://dashboard.uptimerobot.com/sign-up?ref=header
+  - complementary [ref=e184]:
+    - text: 🍪 This website use cookies.
+    - link "Learn more" [ref=e185] [cursor=pointer]:
+      - /url: https://uptimerobot.com/privacy
+    - button "Decline all" [ref=e186] [cursor=pointer]
+    - text: "|"
+    - button "Allow essential" [ref=e187] [cursor=pointer]
+    - text: "|"
+    - button "Accept all" [ref=e188] [cursor=pointer]

@@ -20,6 +20,7 @@ from .agents.speaking_agent import SpeakingAgent
 from .handlers.start_handler import start_handler, help_handler, callback_handler, contact_handler
 from .handlers.writing_handler import writing_handler, document_handler
 from .handlers.speaking_handler import speaking_handler
+from .handlers.speaking_parts_handler import speaking_menu_handler, part_callback_handler
 from .handlers.history_handler import history_handler, stats_handler
 from .handlers.error_handler import error_handler
 
@@ -48,8 +49,11 @@ def build_application() -> Application:
 
     app.add_handler(CommandHandler("start", start_handler))
     app.add_handler(CommandHandler("help", help_handler))
+    app.add_handler(CommandHandler("speaking", speaking_menu_handler))
     app.add_handler(CommandHandler("history", history_handler))
     app.add_handler(CommandHandler("stats", stats_handler))
+    app.add_handler(CallbackQueryHandler(part_callback_handler, pattern="^speaking_part_"))
+    app.add_handler(CallbackQueryHandler(part_callback_handler, pattern="^speaking_menu$"))
     app.add_handler(CallbackQueryHandler(callback_handler))
     app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
     app.add_handler(MessageHandler(filters.VOICE, speaking_handler))

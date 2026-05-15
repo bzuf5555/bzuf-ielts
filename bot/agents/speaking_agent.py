@@ -2,7 +2,11 @@ import logging
 from .base_agent import BaseAgent
 from .router_agent import RouterAgent
 from ..models.feedback_model import SpeakingFeedback, ErrorItem
-from ..utils.prompts import SPEAKING_SYSTEM, build_speaking_prompt
+from ..utils.prompts import (
+    SPEAKING_SYSTEM, build_speaking_prompt,
+    SPEAKING_PART1_SYSTEM, SPEAKING_PART2_SYSTEM, SPEAKING_PART3_SYSTEM,
+    build_speaking_part_prompt,
+)
 from ..utils.validators import count_words
 
 logger = logging.getLogger(__name__)
@@ -29,6 +33,39 @@ class SpeakingAgent(BaseAgent):
             max_tokens=max_tokens,
         )
         feedback = self._parse_speaking_response(data, transcript)
+        return feedback, model, elapsed_ms
+
+    async def analyze_part(
+        self, transcript: str, duration_seconds: float, part: int, question: str
+    ) -> tuple[SpeakingFeedback, str, int]:
+        """Analyze IELTS Speaking Part 1, 2, or 3 with part-specific prompt."""
+        word_count = count_words(transcript)
+        model, max_tokens = self.router.route_speaking(word_count, duration_seconds)
+
+        part_systems = {
+            1: SPEAKING_PART1_SYSTEM,
+            2: SPEAKING_PART2_SYSTEM,
+            3: SPEAKING_PART3_SYSTEM,
+        }
+        system_prompt = part_systems.get(part, SPEAKING_SYSTEM)
+        user_prompt = build_speaking_part_prompt(transcript, int(duration_seconds), part, question)
+
+        data, elapsed_ms = await self.groq.complete_json(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            model=model,
+            max_tokens=max_tokens,
+        )
+        feedback = self._parse_speaking_response(data, transcript)
+
+        # Store extra Part 2/3 specific fields in suggestions if present
+        if part == 2 and "covered_points_uz" in data:
+            feedback.suggestions_uz.insert(0, f"Mavzu qamrovi: {data['covered_points_uz']}")
+        if part == 3 and "argument_quality_uz" in data:
+            feedback.suggestions_uz.insert(0, f"Argument sifati: {data['argument_quality_uz']}")
+        if "time_feedback_uz" in data and data["time_feedback_uz"]:
+            feedback.suggestions_uz.append(f"Vaqt: {data['time_feedback_uz']}")
+
         return feedback, model, elapsed_ms
 
     def _parse_speaking_response(self, data: dict, original_transcript: str) -> SpeakingFeedback:

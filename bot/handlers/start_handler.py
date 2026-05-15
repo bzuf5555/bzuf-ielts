@@ -82,6 +82,7 @@ def _main_inline_keyboard():
             InlineKeyboardButton("✍️ Writing nima?", callback_data="info_writing"),
             InlineKeyboardButton("🎤 Speaking nima?", callback_data="info_speaking"),
         ],
+        [InlineKeyboardButton("🎤 Speaking Amaliyoti (Part 1/2/3)", callback_data="speaking_menu")],
         [InlineKeyboardButton("📊 Mening statistikam", callback_data="show_stats")],
     ])
 
@@ -169,6 +170,9 @@ async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🎤 *Speaking haqida:*\n\nIngliz tilida ovozli xabar yuboring. Bot nutqingizni matnga aylantiradi va 4 mezon bo'yicha IELTS bali beradi:\n\n• Ravonlik va izchillik\n• Leksik boylik\n• Grammatik to'g'rilik\n• Talaffuz",
             parse_mode="Markdown",
         )
+    elif query.data == "speaking_menu":
+        from .speaking_parts_handler import speaking_menu_handler
+        await speaking_menu_handler(update, context)
     elif query.data == "show_stats":
         db = context.bot_data.get("db")
         if db:

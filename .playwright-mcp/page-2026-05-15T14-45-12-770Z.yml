@@ -1,0 +1,274 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - banner [ref=e4]:
+        - generic [ref=e5]:
+          - link "Render" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - img "Render" [ref=e8]
+          - button "b bzuf's workspace" [ref=e12] [cursor=pointer]:
+            - generic [ref=e13]:
+              - generic [ref=e14]: b
+              - generic "bzuf's workspace" [ref=e15]
+              - img [ref=e16]
+        - generic [ref=e20]:
+          - navigation [ref=e21]:
+            - list [ref=e22]:
+              - listitem [ref=e23]:
+                - link "bzuf-ielts" [ref=e1170] [cursor=pointer]:
+                  - /url: /web/srv-d83j2l3tqb8s73dqefh0
+                  - img [ref=e1171]
+                  - generic [ref=e1173]: bzuf-ielts
+                - button [ref=e1174] [cursor=pointer]:
+                  - img [ref=e1175]
+          - button "Search Ctrl + K" [ref=e31] [cursor=pointer]:
+            - img [ref=e33]
+            - text: Search
+            - generic [ref=e35]:
+              - img [ref=e36]
+              - generic [ref=e38]: Ctrl
+              - generic [ref=e39]: +
+              - generic [ref=e40]: K
+              - generic [ref=e41]: K
+        - generic [ref=e42]:
+          - button "New" [ref=e44] [cursor=pointer]:
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - generic [ref=e48]: New
+          - button "Upgrade" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e54]: Upgrade
+          - button "Help" [ref=e56] [cursor=pointer]:
+            - img "Help" [ref=e57]
+          - button "b" [ref=e62] [cursor=pointer]:
+            - generic [ref=e64]: b
+      - generic [ref=e65]:
+        - navigation [ref=e1177]:
+          - separator [ref=e1178]
+          - generic [ref=e1179]:
+            - generic [ref=e1180]:
+              - link "Dashboard" [ref=e1181] [cursor=pointer]:
+                - /url: /
+                - img [ref=e1182]
+                - generic [ref=e1184]: Dashboard
+              - generic [ref=e1185]:
+                - img [ref=e1186]
+                - generic [ref=e1188]: bzuf-ielts
+            - generic [ref=e1189]:
+              - list [ref=e1190]:
+                - listitem [ref=e1191]:
+                  - link "Events" [ref=e1192] [cursor=pointer]:
+                    - /url: /web/srv-d83j2l3tqb8s73dqefh0/events
+                    - img [ref=e1193]
+                    - generic [ref=e1200]: Events
+                - listitem [ref=e1201]:
+                  - link "Settings" [ref=e1202] [cursor=pointer]:
+                    - /url: /web/srv-d83j2l3tqb8s73dqefh0/settings
+                    - img [ref=e1203]
+                    - generic [ref=e1206]: Settings
+              - generic [ref=e1207]:
+                - generic [ref=e1208]: Monitor
+                - list "Monitor" [ref=e1209]:
+                  - listitem [ref=e1210]:
+                    - link "Logs" [ref=e1211] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/logs
+                      - img [ref=e1212]
+                      - generic [ref=e1217]: Logs
+                  - listitem [ref=e1218]:
+                    - link "Metrics" [ref=e1219] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/metrics
+                      - img [ref=e1220]
+                      - generic [ref=e1222]: Metrics
+              - generic [ref=e1223]:
+                - generic [ref=e1224]: Manage
+                - list "Manage" [ref=e1225]:
+                  - listitem [ref=e1226]:
+                    - link "Environment" [ref=e1227] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/env
+                      - img [ref=e1228]
+                      - generic [ref=e1232]: Environment
+                  - listitem [ref=e1233]:
+                    - link "Shell" [ref=e1234] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/shell
+                      - img [ref=e1235]
+                      - generic [ref=e1239]:
+                        - generic [ref=e1240]: Shell
+                        - status [ref=e1243]:
+                          - img [ref=e1244]
+                  - listitem [ref=e1246]:
+                    - link "Scaling" [ref=e1247] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/scaling
+                      - img [ref=e1248]
+                      - generic [ref=e1253]:
+                        - generic [ref=e1254]: Scaling
+                        - status [ref=e1257]:
+                          - img [ref=e1258]
+                  - listitem [ref=e1260]:
+                    - link "Previews" [ref=e1261] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/previews
+                      - img [ref=e1262]
+                      - generic [ref=e1266]: Previews
+                  - listitem [ref=e1267]:
+                    - link "Disk" [ref=e1268] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/disks
+                      - img [ref=e1269]
+                      - generic [ref=e1274]:
+                        - generic [ref=e1275]: Disk
+                        - status [ref=e1278]:
+                          - img [ref=e1279]
+                  - listitem [ref=e1281]:
+                    - link "One-Off Jobs" [ref=e1282] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/jobs
+                      - img [ref=e1283]
+                      - generic [ref=e1289]:
+                        - generic [ref=e1290]: One-Off Jobs
+                        - status [ref=e1293]:
+                          - img [ref=e1294]
+          - generic [ref=e1297]:
+            - button "Collapse items" [expanded] [ref=e1298] [cursor=pointer]:
+              - img [ref=e1299]
+            - list "Footer navigation" [ref=e1301]:
+              - listitem [ref=e1302]:
+                - link "Changelog" [ref=e1303] [cursor=pointer]:
+                  - /url: https://render.com/changelog
+                  - img [ref=e1304]
+                  - generic [ref=e1309]: Changelog
+              - listitem [ref=e1310]:
+                - link "Invite a friend" [ref=e1311] [cursor=pointer]:
+                  - /url: /invites
+                  - img [ref=e1312]
+                  - generic [ref=e1314]: Invite a friend
+              - listitem [ref=e1315]:
+                - button "Contact support" [ref=e1316] [cursor=pointer]:
+                  - img [ref=e1317]
+                  - generic [ref=e1321]: Contact support
+            - link "Render Status" [ref=e1323] [cursor=pointer]:
+              - /url: https://status.render.com
+              - img [ref=e1324]
+              - generic [ref=e1326]: Render Status
+        - generic [ref=e1327]:
+          - banner [ref=e1329]:
+            - generic [ref=e1330]:
+              - generic [ref=e1331]:
+                - img [ref=e1332]
+                - generic [ref=e1334]: Web Service
+              - generic [ref=e1335]:
+                - heading "bzuf-ielts Python 3 Free Upgrade your instance" [level=1] [ref=e1337]:
+                  - generic [ref=e1338]: bzuf-ielts
+                  - generic [ref=e1339]:
+                    - generic [ref=e1340]: Python 3
+                    - link "Free" [ref=e1341] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/plan
+                      - generic [ref=e1342]: Free
+                    - link "Upgrade your instance" [ref=e1343] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/plan
+                      - text: Upgrade your instance
+                      - img [ref=e1345]
+                - generic [ref=e1348]:
+                  - button "Connect" [ref=e1349] [cursor=pointer]:
+                    - generic [ref=e1350]: Connect
+                    - img [ref=e1351]
+                  - button "Manual Deploy" [ref=e1353] [cursor=pointer]:
+                    - generic [ref=e1354]: Manual Deploy
+                    - img [ref=e1355]
+            - generic [ref=e1359]:
+              - generic [ref=e1361]:
+                - generic [ref=e1362]: "Service ID:"
+                - generic "Service ID:" [ref=e1363]:
+                  - generic [ref=e1364]: srv-d83j2l3tqb8s73dqefh0
+                  - button "Copy" [ref=e1367] [cursor=pointer]:
+                    - img [ref=e1368]
+              - generic [ref=e1371]:
+                - img "GitHub" [ref=e1373]
+                - link "bzuf5555 / bzuf-ielts main" [ref=e1375] [cursor=pointer]:
+                  - /url: https://github.com/bzuf5555/bzuf-ielts/tree/main
+                  - generic [ref=e1376]:
+                    - generic [ref=e1377]: bzuf5555 / bzuf-ielts
+                    - img [ref=e1378]
+                    - generic [ref=e1380]: main
+              - generic "Copy" [ref=e1382]:
+                - link "https://bzuf-ielts.onrender.com" [ref=e1384] [cursor=pointer]:
+                  - /url: https://bzuf-ielts.onrender.com
+                - button "Copy" [ref=e1387] [cursor=pointer]:
+                  - img [ref=e1388]
+          - main [ref=e1391]:
+            - generic [ref=e1392]:
+              - alert [ref=e1393]:
+                - generic [ref=e1395]:
+                  - img [ref=e1397]
+                  - generic [ref=e1401]:
+                    - generic [ref=e1403]: Your free instance will spin down with inactivity, which can delay requests by 50 seconds or more.
+                    - link "Upgrade now" [ref=e1405] [cursor=pointer]:
+                      - /url: /web/srv-d83j2l3tqb8s73dqefh0/plan
+              - generic [ref=e1407]:
+                - generic [ref=e1408]:
+                  - generic [ref=e1409]:
+                    - generic [ref=e1410]: May 15, 2026 at 7:44 PM
+                    - generic [ref=e1411]:
+                      - img [ref=e1412]
+                      - generic [ref=e1415]: building
+                  - generic [ref=e1416]:
+                    - link "96115a4" [ref=e1417] [cursor=pointer]:
+                      - /url: https://github.com/bzuf5555/bzuf-ielts/commit/96115a49a4a8ebd520c2ad94b90bdf22c1b8723a
+                    - generic [ref=e1418]: "Initial commit: BZUF IELTS Bot"
+                - button "Cancel deploy" [ref=e1420] [cursor=pointer]
+              - generic [ref=e1421]:
+                - generic [ref=e1423]:
+                  - generic [ref=e1425]:
+                    - button "All logs" [ref=e1428] [cursor=pointer]:
+                      - generic [ref=e1429]:
+                        - generic [ref=e1430]: All logs
+                        - img [ref=e1431]
+                    - generic [ref=e1434]:
+                      - generic [ref=e1435]: Search
+                      - generic [ref=e1437]:
+                        - img [ref=e1438]
+                        - searchbox "Search" [ref=e1440]
+                    - button "Live tail" [ref=e1443] [cursor=pointer]:
+                      - generic [ref=e1446]:
+                        - img [ref=e1447]
+                        - generic [ref=e1449]: Live tail
+                        - img [ref=e1450]
+                    - button "Maximize" [ref=e1456] [cursor=pointer]:
+                      - img "Maximize" [ref=e1457]
+                    - button "Options" [ref=e1462] [cursor=pointer]:
+                      - img "Options" [ref=e1463]
+                  - listbox [ref=e1467]:
+                    - generic [ref=e1471]:
+                      - generic [ref=e1473]:
+                        - img [ref=e1474]
+                        - text: Awaiting build logs...
+                      - generic [ref=e1477]: New log entries will appear here.
+                - paragraph [ref=e1479]:
+                  - text: Need better ways to work with logs? Try the
+                  - link "Render CLI" [ref=e1480] [cursor=pointer]:
+                    - /url: https://render.com/docs/cli
+                    - img [ref=e1481]
+                    - text: Render CLI
+                  - text: ","
+                  - link "Render MCP Server" [ref=e1484] [cursor=pointer]:
+                    - /url: https://render.com/docs/mcp-server
+                  - text: ", or set up a"
+                  - link "log stream integration" [ref=e1485] [cursor=pointer]:
+                    - /url: https://render.com/docs/log-streams
+                    - text: log stream integration
+                    - img [ref=e1486]
+    - generic:
+      - generic:
+        - generic: "0 services selected:"
+        - generic:
+          - generic:
+            - button:
+              - generic:
+                - img
+              - generic: Move
+              - img
+      - generic:
+        - separator
+        - generic:
+          - generic:
+            - button:
+              - img
+  - iframe [ref=e418]:
+    
