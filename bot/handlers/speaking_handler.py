@@ -14,7 +14,6 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     voice = update.message.voice
     if not voice:
-        await update.message.reply_text("❌ Ovozli xabar topilmadi.")
         return
 
     db = context.bot_data.get("db")
@@ -29,12 +28,12 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         allowed = await db.check_rate_limit(user.id)
         if not allowed:
             await update.message.reply_text(
-                "⏳ *Soatlik cheklov:* 1 soatda ko'pi bilan 10 ta tahlil.\n\nKeyinroq urinib ko'ring.",
+                "⏳ *Soatlik cheklov:* 1 soatda ko'pi bilan 10 ta tahlil.",
                 parse_mode="Markdown",
             )
             return
 
-    # ── Parts mode: delegate to parts handler ──────────────────
+    # ── Parts mode ─────────────────────────────────────────────
     if context.user_data.get("speaking_part"):
         await handle_parts_voice(update, context, voice, db, speaking_agent, stt_service)
         return
@@ -46,16 +45,18 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     processing_msg = await update.message.reply_text(
-        f"🎙️ *Nutq qabul qilindi!*\n⏱️ {voice.duration} soniya\n\n🔄 Ovozdan matn ajratilmoqda...",
+        f"🎙️ *Nutq qabul qilindi!*\n⏱️ {voice.duration} soniya\n\n🔄 Matnga aylantirilmoqda...",
         parse_mode="Markdown",
     )
 
     try:
-        file = await context.bot.get_file(voice.file_id)
-        transcript, audio_duration = await stt_service.process_voice_message(file.file_path)
+        telegram_file = await context.bot.get_file(voice.file_id)
+        transcript, audio_duration = await stt_service.process_voice_message(
+            telegram_file, voice.duration
+        )
 
         await processing_msg.edit_text(
-            "✅ *Matn ajratildi!*\n\n📊 IELTS mezonlari bo'yicha baholanmoqda...",
+            "✅ *Matn tayyor!*\n\n📊 IELTS mezonlari bo'yicha baholanmoqda...",
             parse_mode="Markdown",
         )
 
@@ -86,10 +87,10 @@ async def speaking_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(feedback_text, parse_mode="Markdown")
 
     except ValueError as e:
-        logger.warning(f"Speaking validation error (user {user.id}): {e}")
+        logger.warning(f"Speaking validation (user {user.id}): {e}")
         await processing_msg.edit_text(f"❌ {str(e)}")
     except Exception as e:
-        logger.error(f"Speaking analysis error (user {user.id}): {e}", exc_info=True)
+        logger.error(f"Speaking error (user {user.id}): {e}", exc_info=True)
         await processing_msg.edit_text(
-            "❌ Nutqni tahlil qilishda xatolik yuz berdi.\n\nIltimos, keyinroq urinib ko'ring."
+            "❌ Nutqni tahlil qilishda xatolik.\n\nKeyinroq urinib ko'ring."
         )

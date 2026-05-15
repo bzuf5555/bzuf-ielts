@@ -207,8 +207,11 @@ async def handle_parts_voice(
     )
 
     try:
-        file = await context.bot.get_file(voice.file_id)
-        transcript, audio_duration = await stt_service.process_voice_message(file.file_path)
+        telegram_file = await context.bot.get_file(voice.file_id)
+        # Pass File object + voice.duration (PTB native download, avoids .oga bug)
+        transcript, audio_duration = await stt_service.process_voice_message(
+            telegram_file, voice.duration
+        )
 
         await processing_msg.edit_text(
             f"✅ Matn tayyor!\n📊 IELTS Part {part} mezonlari bo'yicha baholanmoqda...",

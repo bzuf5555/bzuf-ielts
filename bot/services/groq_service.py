@@ -2,7 +2,7 @@ import json
 import logging
 import time
 from groq import AsyncGroq
-from groq import RateLimitError, APIError
+from groq import RateLimitError, APIError, BadRequestError
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 logger = logging.getLogger(__name__)
@@ -55,21 +55,32 @@ class GroqService:
             data = json.loads(raw)
             return data, elapsed_ms
         except json.JSONDecodeError as e:
-            logger.error(f"JSON parse error: {e}\nRaw response: {raw[:500]}")
+            logger.error(f"JSON parse error: {e}\nRaw: {raw[:500]}")
             raise ValueError(f"LLM returned invalid JSON: {str(e)}")
 
-    async def transcribe_audio(self, audio_path: str, language: str = "en") -> tuple[str, float]:
+    async def transcribe_audio(self, audio_path: str) -> str:
+        """
+        Transcribe audio file using Groq Whisper.
+        IMPORTANT: always sends file as 'audio.ogg' — Groq rejects .oga extension.
+        """
         start = time.time()
         with open(audio_path, "rb") as audio_file:
-            file_name = audio_path.split("\\")[-1].split("/")[-1]
-            transcription = await self.client.audio.transcriptions.create(
-                file=(file_name, audio_file.read()),
-                model="whisper-large-v3",
-                language=language,
-                response_format="verbose_json",
-            )
+            audio_bytes = audio_file.read()
+
+        if len(audio_bytes) < 100:
+            raise ValueError("Audio fayl juda kichik yoki bo'sh.")
+
+        # CRITICAL: always name the file "audio.ogg" — Groq rejects .oga/.m4a etc.
+        transcription = await self.client.audio.transcriptions.create(
+            file=("audio.ogg", audio_bytes),
+            model="whisper-large-v3",
+            response_format="json",  # Returns Transcription object with .text
+        )
+
         elapsed = time.time() - start
-        transcript = transcription.text.strip()
-        duration = float(getattr(transcription, "duration", 0) or elapsed)
-        logger.info(f"Whisper: {duration:.1f}s audio transcribed in {elapsed:.1f}s, {len(transcript)} chars")
-        return transcript, duration
+        transcript = (transcription.text or "").strip()
+        logger.info(
+            f"Whisper: transcribed {len(audio_bytes)//1024}KB in {elapsed:.1f}s "
+            f"→ {len(transcript)} chars"
+        )
+        return transcript
