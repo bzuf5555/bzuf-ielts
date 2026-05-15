@@ -75,7 +75,9 @@ async def _process_writing(update: Update, context: ContextTypes.DEFAULT_TYPE, t
         return
 
     word_count = count_words(text)
-    task_type = detect_writing_task_type(text)
+
+    # Use explicit task type from user selection; fall back to auto-detection
+    task_type = context.user_data.get("writing_task_type") or detect_writing_task_type(text)
     task_label = "Task 1" if task_type == "task1" else "Task 2"
 
     if task_type == "task1" and word_count < 150:
@@ -86,6 +88,9 @@ async def _process_writing(update: Update, context: ContextTypes.DEFAULT_TYPE, t
         await update.message.reply_text(
             f"ℹ️ Matn {word_count} so'zdan iborat. IELTS Task 2 uchun kamida 250 so'z tavsiya etiladi.",
         )
+
+    # Clear task type state after use
+    context.user_data.pop("writing_task_type", None)
 
     processing_msg = await update.message.reply_text(
         f"⏳ *IELTS Writing {task_label} tahlil qilinmoqda...*\n📏 {word_count} so'z — biroz kuting.",

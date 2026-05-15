@@ -20,7 +20,10 @@ from .agents.speaking_agent import SpeakingAgent
 from .handlers.start_handler import (
     start_handler, help_handler, callback_handler,
     contact_handler, keyboard_button_handler,
-    BTN_PART1, BTN_PART2, BTN_PART3, BTN_STATS, BTN_HISTORY, BTN_HELP,
+    BTN_SPEAKING, BTN_WRITING,
+    BTN_PART1, BTN_PART2, BTN_PART3,
+    BTN_TASK1, BTN_TASK2,
+    BTN_BACK, BTN_STATS, BTN_HISTORY, BTN_HELP,
 )
 from .handlers.writing_handler import writing_handler, document_handler
 from .handlers.speaking_handler import speaking_handler
@@ -63,7 +66,12 @@ def build_application() -> Application:
     app.add_handler(MessageHandler(filters.VOICE, speaking_handler))
     app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
     # Keyboard buttons must be caught BEFORE writing_handler
-    keyboard_btns = filters.Text([BTN_PART1, BTN_PART2, BTN_PART3, BTN_STATS, BTN_HISTORY, BTN_HELP])
+    keyboard_btns = filters.Text([
+        BTN_SPEAKING, BTN_WRITING,
+        BTN_PART1, BTN_PART2, BTN_PART3,
+        BTN_TASK1, BTN_TASK2,
+        BTN_BACK, BTN_STATS, BTN_HISTORY, BTN_HELP,
+    ])
     app.add_handler(MessageHandler(keyboard_btns, keyboard_button_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, writing_handler))
     app.add_error_handler(error_handler)
