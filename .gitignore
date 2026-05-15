@@ -1,0 +1,55 @@
+# Environment
+.env
+*.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Audio temp files
+*.ogg
+*.mp3
+*.wav
+*.m4a
+/tmp/
+temp/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Render
+.render/

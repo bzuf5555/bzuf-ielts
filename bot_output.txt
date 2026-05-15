@@ -1,0 +1,8 @@
+2026-05-15 19:31:30,198 [INFO] __main__: === BZUF IELTS Bot Starting ===
+2026-05-15 19:31:30,806 [INFO] __main__: Starting polling mode (development)
+2026-05-15 19:31:30,907 [INFO] bot.services.mongodb_service: MongoDB indexes ready
+2026-05-15 19:31:34,761 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8234064073:AAE3fVZ2E8HElGmMpD95WADhzW14Ir3Iy6U/getMe "HTTP/1.1 200 OK"
+2026-05-15 19:31:34,865 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8234064073:AAE3fVZ2E8HElGmMpD95WADhzW14Ir3Iy6U/deleteWebhook "HTTP/1.1 200 OK"
+2026-05-15 19:31:34,870 [INFO] telegram.ext.Application: Application started
+2026-05-15 19:31:34,970 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8234064073:AAE3fVZ2E8HElGmMpD95WADhzW14Ir3Iy6U/deleteWebhook "HTTP/1.1 200 OK"
+2026-05-15 19:31:34,972 [INFO] __main__: Bot running (polling). Ctrl+C to stop.
