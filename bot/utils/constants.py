@@ -24,9 +24,9 @@ BAND_LABELS = {
 WORD_COUNT_FAST = 200
 WORD_COUNT_MEDIUM = 400
 
-# Groq model names
-MODEL_FAST = "llama3-8b-8192"
-MODEL_MEDIUM = "llama-3.1-70b-versatile"
+# Groq model names (updated May 2026)
+MODEL_FAST = "llama-3.1-8b-instant"
+MODEL_MEDIUM = "llama-3.3-70b-versatile"
 MODEL_BEST = "llama-3.3-70b-versatile"
 MODEL_WHISPER = "whisper-large-v3"
 
