@@ -17,7 +17,7 @@ from .services.mongodb_service import MongoDBService
 from .services.stt_service import STTService
 from .agents.writing_agent import WritingAgent
 from .agents.speaking_agent import SpeakingAgent
-from .handlers.start_handler import start_handler, help_handler, callback_handler
+from .handlers.start_handler import start_handler, help_handler, callback_handler, contact_handler
 from .handlers.writing_handler import writing_handler, document_handler
 from .handlers.speaking_handler import speaking_handler
 from .handlers.history_handler import history_handler, stats_handler
@@ -51,6 +51,7 @@ def build_application() -> Application:
     app.add_handler(CommandHandler("history", history_handler))
     app.add_handler(CommandHandler("stats", stats_handler))
     app.add_handler(CallbackQueryHandler(callback_handler))
+    app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
     app.add_handler(MessageHandler(filters.VOICE, speaking_handler))
     app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, writing_handler))
@@ -90,7 +91,7 @@ async def run_webhook(app: Application, port: int):
     await app.initialize()
     await app.bot.set_webhook(
         url=webhook_url,
-        allowed_updates=["message", "callback_query"],
+        allowed_updates=["message", "callback_query", "contact"],
         drop_pending_updates=True,
     )
     logger.info(f"Webhook registered: {webhook_url}")

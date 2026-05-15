@@ -7,6 +7,7 @@ class UserModel(BaseModel):
     telegram_id: int
     username: Optional[str] = None
     first_name: Optional[str] = None
+    phone_number: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     submission_count: int = 0
     writing_count: int = 0

@@ -43,6 +43,7 @@ class MongoDBService:
             "telegram_id": telegram_id,
             "username": username,
             "first_name": first_name,
+            "phone_number": None,
             "created_at": datetime.utcnow(),
             "last_active": datetime.utcnow(),
             "submission_count": 0,
@@ -57,6 +58,20 @@ class MongoDBService:
         except DuplicateKeyError:
             new_user = await self.users.find_one({"telegram_id": telegram_id})
         return new_user
+
+    async def has_phone_number(self, telegram_id: int) -> bool:
+        user = await self.users.find_one(
+            {"telegram_id": telegram_id, "phone_number": {"$ne": None}},
+            {"phone_number": 1},
+        )
+        return user is not None
+
+    async def save_phone_number(self, telegram_id: int, phone_number: str):
+        await self.users.update_one(
+            {"telegram_id": telegram_id},
+            {"$set": {"phone_number": phone_number}},
+        )
+        logger.info(f"Phone saved for user {telegram_id}")
 
     async def save_submission(self, submission_doc: dict) -> str:
         result = await self.submissions.insert_one(submission_doc)
