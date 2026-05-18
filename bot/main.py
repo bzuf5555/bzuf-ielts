@@ -110,7 +110,7 @@ async def run_webhook(app: Application, port: int):
     await app.initialize()
     await app.bot.set_webhook(
         url=webhook_url,
-        allowed_updates=["message", "callback_query", "contact"],
+        allowed_updates=["message", "callback_query"],
         drop_pending_updates=True,
     )
     logger.info(f"Webhook registered: {webhook_url}")
