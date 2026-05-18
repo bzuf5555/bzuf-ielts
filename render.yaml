@@ -14,8 +14,6 @@ services:
         sync: false
       - key: MONGODB_URI
         sync: false
-      - key: RENDER_EXTERNAL_URL
-        sync: false
       - key: PORT
         value: 8000
       - key: ENVIRONMENT

@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     telegram_bot_token: str
     groq_api_key: str
     mongodb_uri: str
-    render_external_url: str = "http://localhost:8000"
+    render_external_url: str = ""
     port: int = 8000
     environment: str = "development"
     log_level: str = "INFO"
@@ -27,8 +27,13 @@ class Settings(BaseSettings):
 
     @property
     def webhook_url(self) -> str:
-        base = self.render_external_url.rstrip("/")
-        return f"{base}/webhook"
+        # RENDER_EXTERNAL_HOSTNAME is injected automatically by Render
+        hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+        if hostname:
+            return f"https://{hostname}/webhook"
+        if self.render_external_url:
+            return f"{self.render_external_url.rstrip('/')}/webhook"
+        raise ValueError("Webhook URL could not be determined. Set RENDER_EXTERNAL_URL or deploy on Render.")
 
 
 settings = Settings()
