@@ -134,7 +134,10 @@ async def run_polling(app: Application):
     logger.info("Starting polling mode (development)")
     db: MongoDBService = app.bot_data.get("db")
     if db:
-        await db.setup_indexes()
+        try:
+            await db.setup_indexes()
+        except Exception as e:
+            logger.warning(f"MongoDB setup_indexes failed (non-fatal): {e}")
 
     await app.initialize()
     await app.bot.delete_webhook(drop_pending_updates=True)
@@ -161,7 +164,10 @@ async def main():
     if settings.is_production:
         db: MongoDBService = app.bot_data.get("db")
         if db:
-            await db.setup_indexes()
+            try:
+                await db.setup_indexes()
+            except Exception as e:
+                logger.warning(f"MongoDB setup_indexes failed (non-fatal): {e}")
         await run_webhook(app, settings.port)
     else:
         await run_polling(app)
